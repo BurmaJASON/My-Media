@@ -1,53 +1,39 @@
 @extends('admin.layouts.app')
 
 @section('content')
+
 <div class="col-4">
     <div class="card">
         <div class="card-body" >
-            <form action="{{ route('admin#createCategory') }}" method="POST">
+            <form action="{{ route('admin#categoryUpdate',$updateCategory->category_id) }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="">Category Name</label>
-                    <input type="text" class="form-control" placeholder="Enter category name..." name="categoryName">
+                    <input type="text" class="form-control" placeholder="Enter category name..." name="categoryName" value="{{ old('categoryName',$updateCategory->title) }}">
                     @error('categoryName')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="">Description</label>
-                    <textarea class="form-control" placeholder="Enter description..." name="categoryDescription"></textarea>
+                    <textarea class="form-control" placeholder="Enter description..." name="categoryDescription">{{ old('categoryDescription',$updateCategory->description) }}</textarea>
                     @error('categoryDescription')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-secondary form-control">Submit</button>
+                <a href="{{ route('admin#category') }}">
+                    <button type="button" class="btn btn-secondary">Back</button>
+                </a>
+                <button type="submit" class="btn btn-dark ">Update</button>
+
             </form>
         </div>
     </div>
 </div>
 <div class="col-7">
 
-    {{-- alert deleteSuccess --}}
-    @if (Session::has('deleteSuccess'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ Session::get('deleteSuccess') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    {{-- alert deleteSuccess --}}
 
-    {{-- alert updateSuccess --}}
-    @if (Session::has('updateSuccess'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ Session::get('updateSuccess') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    {{-- alert updateSuccess --}}
+
 
     <div class="card">
       <div class="card-header">
