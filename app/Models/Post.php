@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillabel = [
+    protected $fillable = [
         'post_id',
         'title',
         'description',

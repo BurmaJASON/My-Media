@@ -49,59 +49,64 @@
     @endif
     {{-- alert updateSuccess --}}
 
+    @if (count($categories) != 0)
     <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Category List Table</h3>
+        <div class="card-header">
+            <h3 class="card-title">Category List Table</h3>
 
-        <div class="card-tools">
-          <form action="{{ route('admin#categorySearch') }}" method="POST">
-            @csrf
-            <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" name="categorySearch" class="form-control float-right" placeholder="Search" value="{{ request('categorySearch') }}">
+            <div class="card-tools">
+            <form action="{{ route('admin#categorySearch') }}" method="POST">
+                @csrf
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="categorySearch" class="form-control float-right" placeholder="Search" value="{{ request('categorySearch') }}">
 
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                    </button>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
+            </form>
             </div>
-          </form>
         </div>
-      </div>
-      <!-- /.card-header -->
-      <div class="card-body table-responsive p-0">
-        <table class="table table-hover text-nowrap text-center">
-          <thead>
-            <tr>
-              <th>Category ID</th>
-              <th>Category Name</th>
-              <th>Description</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($categories as $index => $category)
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap text-center">
+            <thead>
                 <tr>
-                    <td>{{ $index +1 }}</td>
-                    <td>{{ $category->title }}</td>
-                    <td>{{ $category->description }}</td>
-                    <td>
-                        <a href="{{ route('admin#categoryEditPage',$category->category_id) }}">
-                            <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                        </a>
-                        <a href="{{ route('admin#deleteCategory',$category->category_id) }}">
-                            <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-                        </a>
-                    </td>
+                <th>Category ID</th>
+                <th>Category Name</th>
+                <th>Description</th>
+                <th></th>
                 </tr>
-            @endforeach
+            </thead>
+            <tbody>
+                @foreach ($categories as $index => $category)
+                    <tr>
+                        <td>{{ $index +1 }}</td>
+                        <td>{{ $category->title }}</td>
+                        <td>{{ $category->description }}</td>
+                        <td>
+                            <a href="{{ route('admin#categoryEditPage',$category->category_id) }}">
+                                <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
+                            </a>
+                            <a href="{{ route('admin#deleteCategory',$category->category_id) }}">
+                                <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
 
-          </tbody>
-        </table>
-      </div>
-      <!-- /.card-body -->
+            </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
     </div>
     <!-- /.card -->
+    @else
+        <h1 class="text-center text-secondary mt-5">There is no Category Here!</h1>
+    @endif
+
 </div>
 @endsection
 

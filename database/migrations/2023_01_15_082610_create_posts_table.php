@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('post_id');
             $table->string('title');
             $table->longText('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('category_id');
             $table->timestamps();
         });
