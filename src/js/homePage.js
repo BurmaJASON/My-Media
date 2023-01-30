@@ -4,6 +4,7 @@ export default {
     data() {
         return {
             postLists : [],
+            categoryLists : []
         }
     },
     methods:  {
@@ -18,14 +19,20 @@ export default {
                         response.data.posts[i].image = 'http://localhost:8000/defaultImage/default-image.jpg';
                     }
                 }
-                console.log(response.data.posts);
                 this.postLists = response.data.posts;
             });
-
+        },
+        loadCategory() {
+            axios.get("http://localhost:8000/api/allCategory").then((response) => {
+                this.categoryLists = response.data.categories;
+            }).catch((err) => {
+                console.log(err.message);
+            });
         }
     },
     mounted() {
         this.getAllPost();
+        this.loadCategory();
     }
    
 }

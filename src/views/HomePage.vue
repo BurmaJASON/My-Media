@@ -16,64 +16,14 @@
                                         <!--Nav Button  -->
                                         <nav>
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="details.htmlnav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a
-                            >
-                            <a
-                            class="nav-item nav-link"
-                            id="nav-profile-tab"
-                            data-toggle="tab"
-                            href="details.htmlnav-profile"
-                            role="tab"
-                            aria-controls="nav-profile"
-                            aria-selected="false"
-                            >Lifestyle</a
-                            >
-                            <a
-                            class="nav-item nav-link"
-                            id="nav-contact-tab"
-                            data-toggle="tab"
-                            href="details.htmlnav-contact"
-                            role="tab"
-                            aria-controls="nav-contact"
-                            aria-selected="false"
-                            >Travel</a
-                            >
-                            <a
-                            class="nav-item nav-link"
-                            id="nav-last-tab"
-                            data-toggle="tab"
-                            href="details.htmlnav-last"
-                            role="tab"
-                            aria-controls="nav-contact"
-                            aria-selected="false"
-                            >Fashion</a
-                            >
-                            <a
-                            class="nav-item nav-link"
-                            id="nav-Sports"
-                            data-toggle="tab"
-                            href="details.htmlnav-nav-Sport"
-                            role="tab"
-                            aria-controls="nav-contact"
-                            aria-selected="false"
-                            >Sports</a
-                            >
-                            <a
-                            class="nav-item nav-link"
-                            id="nav-technology"
-                            data-toggle="tab"
-                            href="details.htmlnav-techno"
-                            role="tab"
-                            aria-controls="nav-contact"
-                            aria-selected="false"
-                            >Technology</a
-                            >
-                        </div>
+                                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="details.htmlnav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
+                                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="details.htmlnav-home" role="tab" aria-controls="nav-profile" aria-selected="false" v-for="category in categoryLists" :key="category.category_id">{{ category.title }}</a>
+                                            </div>
                                         </nav>
-                        <!--End Nav Button  -->
-                    </div>
-                    </div>
-                </div>
+                                        <!--End Nav Button  -->
+                                    </div>
+                                </div>
+                            </div>
                 <div class="row">
                     <div class="col-12">
                     <!-- Nav Card -->
@@ -109,8 +59,8 @@
                     </div>
                 </div>
                 </div>
-            </div> 
-            </div>
+                    </div> 
+                    </div>
         </section>
         <!-- Whats New End -->
 
