@@ -16,8 +16,8 @@
                                         <!--Nav Button  -->
                                         <nav>
                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="details.htmlnav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
-                                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="details.htmlnav-home" role="tab" aria-controls="nav-profile" aria-selected="false" v-for="category in categoryLists" :key="category.category_id">{{ category.title }}</a>
+                                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="details.htmlnav-home" role="tab" aria-controls="nav-home" aria-selected="true" @click="categorySearch('')">All</a>
+                                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="details.htmlnav-home" role="tab" aria-controls="nav-profile" aria-selected="false" v-for="category in categoryLists" :key="category.category_id" @click="categorySearch(category.title)">{{ category.title }}</a>
                                             </div>
                                         </nav>
                                         <!--End Nav Button  -->
@@ -26,6 +26,10 @@
                             </div>
                 <div class="row">
                     <div class="col-12">
+                        <div class="d-flex">
+                            <input @keyup.enter="search" type="text" class="form-control col-md-3 col-sm-11 offset-md-9" v-model="searchKey">                            
+                            <i @click="search" class="fas fa-search special-tag mt-2 ml-2" style="font-size : 20px;"></i>
+                        </div>
                     <!-- Nav Card -->
                     <div class="tab-content" id="nav-tabContent">
                         <!-- card one -->
@@ -36,20 +40,28 @@
                         aria-labelledby="nav-home-tab">
                         <div class="whats-news-caption">
                             <div class="row">
-                                <div class="col-lg-6 col-md-6" v-for="post in postLists" :key="post.post_id">
-                                    <div class="single-what-news mb-100">
-                                        <div class="what-img">
-                                            <img
-                                                :src="post.image"
-                                                alt=""/>
-                                        </div>
-                                        <div class="what-cap">
-                                            <span class="color1"></span>
-                                            <h4>
-                                                <a href="details.html">{{ post.title }}</a>
-                                            </h4>
-                                        </div>
-                                    </div>
+
+                                <div class="mx-auto my-5" v-if="postLists.length == 0">
+                                    <h2 class="text-secondary">Sorry, there are no results!</h2>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 my-3"  v-for="(post, index) in postLists" :key="index">
+
+                                            <div class="single-what-news mb-100 card" @click="newsDetail(post.post_id)">
+                                                <div class="what-img">
+                                                    <img
+                                                        :src="post.image"
+                                                        alt=""/>
+                                                </div>
+                                                <div class="what-cap">
+                                                    <span class="color1">{{ post.category_title }}</span>
+                                                        <h4 class="ml-2">
+                                                            <a href="details.html">{{ post.title }}</a>
+                                                        </h4>
+                                                </div>
+                                            </div>
+                                        
+                                    
                                 </div>
                             </div>
                         </div>

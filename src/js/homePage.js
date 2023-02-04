@@ -1,10 +1,12 @@
 import axios from "axios"
 export default {
+    
     name : 'HomePage',
     data() {
         return {
             postLists : [],
-            categoryLists : []
+            categoryLists : [],
+            searchKey : "",
         }
     },
     methods:  {
@@ -19,6 +21,7 @@ export default {
                         response.data.posts[i].image = 'http://localhost:8000/defaultImage/default-image.jpg';
                     }
                 }
+
                 this.postLists = response.data.posts;
             });
         },
@@ -27,6 +30,50 @@ export default {
                 this.categoryLists = response.data.categories;
             }).catch((err) => {
                 console.log(err.message);
+            });
+        },
+        search() {
+            let search = {
+                key : this.searchKey
+            };
+            axios.post("http://localhost:8000/api/post/search",search).then((response) => {
+                console.log(response.data);
+                for (let i = 0; i < response.data.searchPosts.length; i++) {
+                    if(response.data.searchPosts[i].image != null) {
+                        response.data.searchPosts[i].image = 'http://localhost:8000/storage/postImage/'+ response.data.searchPosts[i].image;
+                    }else {
+                        response.data.searchPosts[i].image = 'http://localhost:8000/defaultImage/default-image.jpg';
+                    }
+                }
+                this.postLists = response.data.searchPosts;
+            });   
+        },
+        categorySearch(searchKey) {
+            let search = {
+                key : searchKey
+            };
+
+            axios.post("http://localhost:8000/api/category/search",search).then((response) => {
+
+                for (let i = 0; i < response.data.result.length; i++) {
+                    if(response.data.result[i].image != null) {
+                        response.data.result[i].image = 'http://localhost:8000/storage/postImage/'+ response.data.result[i].image;
+                    }else {
+                        response.data.result[i].image = 'http://localhost:8000/defaultImage/default-image.jpg';
+                    }
+                }
+
+                this.postLists = response.data.result;
+
+            }).catch(error => console.log(error.message));
+        },
+        newsDetail(id) {
+            console.log(id);
+            this.$router.push({
+                name : 'newsDetail',
+                query : {
+                    newsId : id,
+                },
             });
         }
     },
