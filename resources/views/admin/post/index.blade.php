@@ -99,7 +99,7 @@
                             <th>Post Title</th>
                             <th>Category</th>
                             <th>Image</th>
-                            <th></th>
+                            <th></th> 
                         </tr>
                     </thead>
                     <tbody>

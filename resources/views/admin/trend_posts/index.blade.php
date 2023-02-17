@@ -23,46 +23,42 @@
         <table class="table table-hover text-nowrap text-center">
           <thead>
             <tr>
-              <th>Order ID</th>
-              <th>Customer Name</th>
-              <th>Pizza Name</th>
-              <th>Carrier Name</th>
-              <th>Payment With</th>
-              <th>Order Time</th>
+              <th>ID</th>
+              <th>Post Title</th>
+              <th>Image</th>
+              <th>View Count</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Sithu</td>
-              <td>Seafood Pizza</td>
-              <td>Mg Kyaw Kyaw</td>
-              <td>Card</td>
-              <td>2/2/2021</td>
-              <td>
-                <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Tun Tun</td>
-              <td>Seafood Pizza</td>
-              <td>Mg Kyaw Kyaw</td>
-              <td>Card</td>
-              <td>2/2/2021</td>
-              <td>
-                <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-              </td>
-            </tr>
+            @foreach ($posts as $index => $post)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $post->title }}</td>
+                    <td>
+                        @if ($post->image == null)
+                            <img src="{{ asset('defaultImage/default-image.jpg') }}"  class="rounded w-25 shadow-sm">
+                        @else
+                            <img src="{{ asset('storage/postImage/'.$post->image) }}"  class="rounded w-25 shadow-sm">
+                        @endif
+                    </td>
+                    <td><i class="fa-solid fa-eye mr-2"></i>{{ $post->post_count }}</td>
+
+                    <td>
+                        <a href="{{ route('admin#trendPostDetails',$post->post_id) }}"  class="btn btn-sm bg-dark text-white"><i class="fa-solid fa-barcode"></i></a>
+                        {{-- <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button> --}}
+                    </td>
+                </tr>
+            @endforeach
           </tbody>
         </table>
-      </div>
-      <!-- /.card-body -->
     </div>
-    <!-- /.card -->
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->
+<div class="d-flex justify-content-end">
+    {{-- {{ $posts->links() }} --}}
+</div>
 </div>
 @endsection
 
