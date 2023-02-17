@@ -1,5 +1,10 @@
 <template>
     <div>
+       <div class="d-flex justify-content-center pt-3 ">
+            <!-- <p class="btn bg-primary mr-3" @click="home">Home</p> -->
+            <!-- <p class="btn bg-dark" @click="login" v-if="!tokenStatus">Login Page</p> -->
+            <p class="btn bg-dark" @click="logout" v-if="tokenStatus">Logout Page</p>
+       </div>
         <!-- Whats New Start -->
         <section class="whats-news-area pt-50 pb-20">
                 <div class="container">
@@ -38,33 +43,36 @@
                         id="nav-home"
                         role="tabpanel"
                         aria-labelledby="nav-home-tab">
-                        <div class="whats-news-caption">
-                            <div class="row">
 
-                                <div class="mx-auto my-5" v-if="postLists.length == 0">
-                                    <h2 class="text-secondary">Sorry, there are no results!</h2>
+                            <div class="whats-news-caption">
+                                
+                                <div class="alert alert-primary text-center my-3" v-if="!tokenStatus" role="alert">
+                                    You need to log into your account to see latest news! <a href="#" v-if="!tokenStatus" class="alert-link" @click="login" >Click Here to Login.</a>
                                 </div>
 
-                                <div class="col-lg-4 col-md-4 my-3"  v-for="(post, index) in postLists" :key="index">
+                                <div v-if="tokenStatus" class="row">
+                                    <div class="mx-auto my-5" v-if="postLists.length == 0">
+                                        <h2 class="text-secondary">Sorry, there are no results!</h2>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 my-3" v-else-if="postLists.length != 0"  v-for="(post, index) in postLists" :key="index">
 
                                             <div class="single-what-news mb-100 card" @click="newsDetail(post.post_id)">
-                                                <div class="what-img">
-                                                    <img
-                                                        :src="post.image"
-                                                        alt=""/>
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">{{ post.category_title }}</span>
-                                                        <h4 class="ml-2">
-                                                            <a href="details.html">{{ post.title }}</a>
-                                                        </h4>
-                                                </div>
+                                            <div class="what-img">
+                                                <img
+                                                            :src="post.image"
+                                                            alt=""/>
                                             </div>
-                                        
-                                    
-                                </div>
+                                            <div class="what-cap">
+                                                <span class="color1">{{ post.category_title }}</span>
+                                                    <h4 class="ml-2">
+                                                        <a href="details.html">{{ post.title }}</a>
+                                                    </h4>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                </div>                                                          
                             </div>
-                        </div>
                         </div>
                     </div>
                     <!-- End Nav Card -->
